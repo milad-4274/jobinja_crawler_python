@@ -1,4 +1,7 @@
+from peewee import *
 
+db = SqliteDatabase("jobinja.db")
+db.connect()
 
 class BriefJob():
     def __init__(self, title : str, company_name: str, location: str, type: str, link: str):
@@ -24,17 +27,54 @@ class BriefJob():
         return self.link
     
 
-class Job():
-    def __init__(self,brief: BriefJob, category: str, minimum_years: str, salary: str, description, compony_summary, skills, sex, military_status, minimum_license) -> None:
-        self.brief = brief
-        self.category = category
-        self.minimum_years = minimum_years
-        self.salary = salary
-        self.description = description
-        self.compony_summary = compony_summary
-        self.skills = skills
-        self.sex = sex
-        self.military_status = military_status
-        self.license = minimum_license
+class Skill(Model):
+    name = CharField()
+
+    class Meta:
+        database = db # This model uses the "people.db" database.
+
     
+
+
+
+class Job(Model):
+    # def __init__(self,brief: BriefJob, category: str, minimum_years: str, salary: str, description, compony_summary, skills, sex, military_status, minimum_license) -> None:
+    #     self.brief = brief
+    #     self.category = category
+    #     self.minimum_years = minimum_years
+    #     self.salary = salary
+    #     self.description = description
+    #     self.compony_summary = compony_summary
+    #     self.skills = skills
+    #     self.sex = sex
+    #     self.military_status = military_status
+    #     self.license = minimum_license
+
+    title = TextField()
+    compony_name = CharField()
+    location = CharField()
+    j_type = CharField()
+    link = TextField(unique=True)
+    category = CharField()
+    years = CharField()
+    salary = CharField()
+    description = TextField()
+    compony_summary = TextField()
+    sex = CharField()
+    military = CharField()
+    license = CharField()
+    
+
+    class Meta:
+        database = db # This model uses the "people.db" database.
+
+
+class JobSkill(Model):
+    job = ForeignKeyField(Job)
+    skill = ForeignKeyField(Skill)
+
+
+    class Meta:
+        database = db # This model uses the "people.db" database.
+
 
