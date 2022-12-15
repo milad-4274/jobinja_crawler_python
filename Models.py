@@ -10,6 +10,8 @@ class BriefJob():
         self.location = location
         self.type = type
         self.link = link
+
+    def __init__(self, brief: BriefJob)
     
     def get_title(self):
         return self.title
@@ -25,6 +27,9 @@ class BriefJob():
 
     def get_link(self):
         return self.link
+
+    def get_info(self):
+        return 
     
 
 class Skill(Model):
@@ -37,18 +42,21 @@ class Skill(Model):
 
 
 
-class Job(Model):
-    # def __init__(self,brief: BriefJob, category: str, minimum_years: str, salary: str, description, compony_summary, skills, sex, military_status, minimum_license) -> None:
-    #     self.brief = brief
-    #     self.category = category
-    #     self.minimum_years = minimum_years
-    #     self.salary = salary
-    #     self.description = description
-    #     self.compony_summary = compony_summary
-    #     self.skills = skills
-    #     self.sex = sex
-    #     self.military_status = military_status
-    #     self.license = minimum_license
+class Job(Model, BriefJob):
+    def __init__(self,brief: BriefJob, category: str, minimum_years: str, salary: str, description, compony_summary, skills, sex, military_status, minimum_license) -> None:
+        # self.brief = brief
+        super().__init__(brief)
+        self.category = category
+        self.minimum_years = minimum_years
+        self.salary = salary
+        self.description = description
+        self.compony_summary = compony_summary
+        self.skills = skills
+        self.sex = sex
+        self.military_status = military_status
+        self.license = minimum_license
+
+
 
     title = TextField()
     compony_name = CharField()
